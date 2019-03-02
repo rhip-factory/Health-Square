@@ -14,8 +14,9 @@ import PageLoading from "../../components/PageLoading";
 
 import appActions from "../../redux/app/actions";
 import Dashboard from "../Views/Dashboard";
+import Messages from '../Views/Messages'
+import Enquiries from "../Views/Enquiries"
 
-const Footer = Layout.Footer;
 const { toggleAll } = appActions;
 const Content = Layout.Content;
 
@@ -32,6 +33,9 @@ class Full extends Component {
     return (
       <Switch>
         <Route path="/feeds" name="Dashboard" component={Dashboard} />
+        <Route path="/enquiries" name="Dashboard" component={Enquiries} />
+        <Route path="/messaging" name="Dashboard" component={Messages} />
+        <Redirect from="/" to="/feeds" />
       </Switch>
     );
   }
