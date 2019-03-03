@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import Popover from '../uielements/popover';
 import userpic from '../../image/user1.png';
 import authAction from '../../redux/auth/actions';
@@ -29,9 +30,9 @@ class TopbarUser extends Component {
         <a className="isoDropdownLink">Settings</a>
         <a className="isoDropdownLink">Feedback</a>
         <a className="isoDropdownLink">Help</a>
-        <a className="isoDropdownLink" onClick={this.props.logout}>
+        <Link to="/login" className="isoDropdownLink" onClick={this.props.logout}>
           Logout
-        </a>
+        </Link>
       </TopbarDropdownWrapper>
     );
 
