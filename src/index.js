@@ -21,6 +21,8 @@ import App from './containers/App/App'
 // Views
 import SignIn from "./containers/Page/signin";
 import Landing from './containers/Views/LandingPage/landing'
+import SignUp from './containers/Page/signup'
+
 import configureStore from "./store";
 
 const store = configureStore(() => {});
@@ -61,6 +63,12 @@ class Main extends React.Component {
                         path="/login"
                         name="Login Page"
                         component={SignIn}
+                      />
+                      <Route
+                        exact
+                        path="/register"
+                        name="Register Page"
+                        component={SignUp}
                       />
                       <Route path="/" name="Home" component={App} />
                     </Switch>

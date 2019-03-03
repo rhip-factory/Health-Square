@@ -58,6 +58,8 @@ class SimpleForm extends Component {
   render() {
     return (
       <ChatBot
+        headerTitle="Messaging"
+        recognitionEnable={true}
         steps={[
           {
             id: '1',
@@ -89,74 +91,59 @@ class SimpleForm extends Component {
           {
             id: 'age',
             user: true,
-            trigger: '7',
+            trigger: 'problem',
             validator: (value) => {
               if (isNaN(value)) {
-                return 'value must be a number';
+                return 'Please provide age in numeric form';
               } else if (value < 0) {
-                return 'value must be positive';
+                return "Really?? I think you mistyped your age. Tell me your age, it's between us I promise";
               } else if (value > 120) {
                 return `${value}? Come on!`;
               }
-
               return true;
             },
           },
           {
-            id: '7',
-            message: 'Great! Check out your summary',
-            trigger: 'review',
+            id: 'problem',
+            message: 'How may I be of help today?',
+            trigger: 'userProblem',
           },
           {
-            id: 'review',
-            component: <Review />,
-            asMessage: true,
-            trigger: 'update',
+            id: 'userProblem',
+            user: true,
+            trigger: 'symptoms',
           },
           {
-            id: 'update',
-            message: 'Would you like to update some field?',
-            trigger: 'update-question',
+            id: 'symptoms',
+            message: "What symptoms are you experiencing",
+            trigger: 'userSymptoms',
           },
           {
-            id: 'update-question',
+            id: 'userSymptoms',
+            user: true,
+            trigger: 'medication',
+          },
+          {
+            id: "medication",
+            message: "Have you actually tried taking any medication?",
+            trigger: 'medicationQuestion',
+          },
+          {
+            id: "medicationQuestion",
             options: [
-              { value: 'yes', label: 'Yes', trigger: 'update-yes' },
-              { value: 'no', label: 'No', trigger: 'end-message' },
+              { value: 'yes', label: 'Yes', trigger: 'userMedication' },
+              { value: 'no', label: 'No', trigger: 'userMedication' },
             ],
           },
           {
-            id: 'update-yes',
-            message: 'What field would you like to update?',
-            trigger: 'update-fields',
+            id: 'userMedication',
+            user: true,
+            trigger: 'advice',
           },
           {
-            id: 'update-fields',
-            options: [
-              { value: 'name', label: 'Name', trigger: 'update-name' },
-              { value: 'gender', label: 'Gender', trigger: 'update-gender' },
-              { value: 'age', label: 'Age', trigger: 'update-age' },
-            ],
-          },
-          {
-            id: 'update-name',
-            update: 'name',
-            trigger: '7',
-          },
-          {
-            id: 'update-gender',
-            update: 'gender',
-            trigger: '7',
-          },
-          {
-            id: 'update-age',
-            update: 'age',
-            trigger: '7',
-          },
-          {
-            id: 'end-message',
-            message: 'Thanks! Your data was submitted successfully!',
-            end: true,
+            id: 'advice',
+            message: 'From symptoms and medications provided, you can take a little aspirine and agbo jedi',
+            end: true
           },
         ]}
       />

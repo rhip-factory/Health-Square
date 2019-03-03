@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { Badge } from 'antd'
 import Popover from '../uielements/popover';
 import userpic from '../../image/user1.png';
 import authAction from '../../redux/auth/actions';
@@ -46,6 +47,9 @@ class TopbarUser extends Component {
         placement="bottomLeft"
       >
         <div className="isoImgWrapper">
+          <Badge count={`99k`} style={{ backgroundColor: '#52c41a' }} >
+            <a href="#" className="head-example" />
+          </Badge>
           <img alt="user" src={userpic} />
           <span className="userActivity online" />
         </div>

@@ -16,6 +16,7 @@ import appActions from "../../redux/app/actions";
 import Dashboard from "../Views/Dashboard";
 import Messages from "../Views/Messages";
 import Enquiries from "../Views/Enquiries";
+import Rewards from '../Views/Rewards'
 
 const { toggleAll } = appActions;
 const Content = Layout.Content;
@@ -49,6 +50,7 @@ class Full extends Component {
         <Route path="/feeds" name="Feeds" component={Dashboard} />
         <Route path="/enquiries" name="Enquiries" component={Enquiries} />
         <Route path="/messaging" name="Messaging" component={Messages} />
+        <Route path="/rewards" name="Rewards" component={Rewards} />
         <Redirect from="/" to="/feeds" />
       </Switch>
     );
