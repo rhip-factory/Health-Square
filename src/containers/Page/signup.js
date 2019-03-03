@@ -46,6 +46,14 @@ class SignIn extends Component {
 
             <div className="isoSignInForm">
               <div className="isoInputWrapper">
+                <Input size="large" type="text" placeholder="Full Name" />
+              </div>
+
+                <div className="isoInputWrapper">
+                <Input size="large" type="email" placeholder="E-mail address" />
+              </div>
+
+              <div className="isoInputWrapper">
                 <Input size="large" placeholder="Username" />
               </div>
 
@@ -58,7 +66,7 @@ class SignIn extends Component {
                   <IntlMessages id="page.signInRememberMe" />
                 </Checkbox>
                 <Button type="primary" onClick={this.handleLogin}>
-                  <IntlMessages id="page.signInButton" />
+                  <IntlMessages id="page.signUpButton" />
                 </Button>
               </div>
 
@@ -68,18 +76,15 @@ class SignIn extends Component {
 
               <div className="isoInputWrapper isoOtherLogin">
                 <Button onClick={this.handleLogin} type="primary btnFacebook">
-                  <IntlMessages id="page.signInFacebook" />
+                  <IntlMessages id="page.signUnFacebook" />
                 </Button>
                 <Button onClick={this.handleLogin} type="primary btnGooglePlus">
-                  <IntlMessages id="page.signInGooglePlus" />
+                  <IntlMessages id="page.signUnGooglePlus" />
                 </Button>
               </div>
               <div className="isoCenterComponent isoHelperWrapper">
-                <Link to="" className="isoForgotPass">
-                  <IntlMessages id="page.signInForgotPass" />
-                </Link>
-                <Link to="/register">
-                  <IntlMessages id="page.signInCreateAccount" />
+                <Link to="">
+                  <IntlMessages id="page.signUnCreateAccount" />
                 </Link>
               </div>
             </div>
