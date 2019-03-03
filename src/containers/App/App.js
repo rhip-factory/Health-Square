@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Layout } from "antd";
-import { Debounce } from "react-throttle";
-import { WindowResizeListener } from "react-window-resize-listener";
+import { Alert } from "antd";
 import AppHolder from "./commonStyle";
 
 import Card from "../../components/uielements/card";
@@ -14,8 +13,8 @@ import PageLoading from "../../components/PageLoading";
 
 import appActions from "../../redux/app/actions";
 import Dashboard from "../Views/Dashboard";
-import Messages from '../Views/Messages'
-import Enquiries from "../Views/Enquiries"
+import Messages from "../Views/Messages";
+import Enquiries from "../Views/Enquiries";
 
 const { toggleAll } = appActions;
 const Content = Layout.Content;
@@ -25,16 +24,30 @@ class Full extends Component {
     super(props);
     this.state = {
       ready: true,
-      redirect: false
+      redirect: false,
+      offline: !navigator.onLine
     };
   }
+  componentDidMount() {
+    window.addEventListener("online", this.setOfflineStatus);
+    window.addEventListener("offline", this.setOfflineStatus);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("online", this.setOfflineStatus);
+    window.removeEventListener("offline", this.setOfflineStatus);
+  }
+
+  setOfflineStatus = () => {
+    this.setState({ offline: !navigator.onLine });
+  };
 
   userComponent() {
     return (
       <Switch>
-        <Route path="/feeds" name="Dashboard" component={Dashboard} />
-        <Route path="/enquiries" name="Dashboard" component={Enquiries} />
-        <Route path="/messaging" name="Dashboard" component={Messages} />
+        <Route path="/feeds" name="Feeds" component={Dashboard} />
+        <Route path="/enquiries" name="Enquiries" component={Enquiries} />
+        <Route path="/messaging" name="Messaging" component={Messages} />
         <Redirect from="/" to="/feeds" />
       </Switch>
     );
@@ -47,16 +60,6 @@ class Full extends Component {
       userComponent !== "none" ? (
         <AppHolder>
           <Layout style={{ height: "100vh" }}>
-            <Debounce time="1000" handler="onResize">
-              <WindowResizeListener
-                onResize={windowSize =>
-                  this.props.toggleAll(
-                    windowSize.windowWidth,
-                    windowSize.windowHeight
-                  )
-                }
-              />
-            </Debounce>
             <Topbar {...this.props} />
             <Layout style={{ flexDirection: "row", overflowX: "hidden" }}>
               <Sidebar {...this.props} />
@@ -74,11 +77,17 @@ class Full extends Component {
                     background: "#f1f3f6"
                   }}
                 >
+                {this.state.offline && (
+                  <div style={{ display: "flex" }} >
+                    <Alert
+                      message="You're offline... Nevermind, you can still access almost everything"
+                      type="error"
+                      closable
+                    />
+                  </div>
+                )}
                   <Card>{userComponent}</Card>
                 </Content>
-                ) : (
-                <i />
-                )}
               </Layout>
             </Layout>
           </Layout>
@@ -96,7 +105,7 @@ class Full extends Component {
 
 const mapStateToProps = state => {
   return {
-    toggleAll,
+    toggleAll
   };
 };
 

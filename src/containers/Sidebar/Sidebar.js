@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { Layout } from "antd";
 import { Scrollbars } from "react-custom-scrollbars";
 import Menu from "../../components/uielements/menu";
-import IntlMessages from "../../components/utility/intlMessages";
 import SidebarWrapper from "./sidebar.style";
 
 import appActions from "../../redux/app/actions";
@@ -75,7 +74,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { url, app, toggleOpenDrawer } = this.props;
+    const { app, toggleOpenDrawer } = this.props;
     const customizedTheme = getCurrentTheme("sidebarTheme", themeConfig.theme);
     const collapsed = clone(app.collapsed) && !clone(app.openDrawer);
     const { openDrawer } = app;
